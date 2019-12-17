@@ -59,7 +59,7 @@ def incoming(input_path):
     """
     try:
         infile = open(input_path, 'r', encoding='Windows-1252') 
-    except ConnectionError as incoming_error:
+    except FileNotFoundError as incoming_error:
         exception(incoming_error)
     except Exception as incoming_e:
         exception(incoming_e)

@@ -1,6 +1,6 @@
 create table news_tbl (
-    doc_id bigint primary key,
-    doc_text varchar
+    storeid bigint primary key,
+    full_text varchar
 );
 
 create table news_meta_tbl (
@@ -22,7 +22,7 @@ create table news_meta_tbl (
     pubdate date,
     pubtitle char(25),
     year int,
-    documenturl varchar,
+    permalink varchar,
     startpage char(10),
     subjectterms varchar,
     subjects varchar,
@@ -59,10 +59,10 @@ from '...\coal_study\meta\wall_street_journal_meta_2_of_2.txt'
 with (format csv, header);
 
 create view news_vw as (
-    select distinct ns.doc_id,
+    select distinct ns.storeid,
         mt.title,
         mt.abstract,
-        ns.doc_text,
+        ns.full_text,
         mt.articletype,
         mt.authors,
         mt.coden,
@@ -78,7 +78,7 @@ create view news_vw as (
         mt.pubdate,
         mt.pubtitle,
         mt.year,
-        mt.documenturl,
+        mt.permalink,
         mt.startpage,
         mt.subjectterms,
         mt.subjects,
@@ -86,7 +86,7 @@ create view news_vw as (
         mt.database
     from news_tbl as ns
     left join news_meta_tbl as mt
-        on ns.doc_id = mt.storeid
+        on ns.storeid = mt.storeid
 );
 
 create table congress_meta_tbl (
