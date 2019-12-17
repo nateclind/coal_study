@@ -1,0 +1,8 @@
+*.vscode
+*.pdf
+*.exe
+*.bin
+*.R
+*.DS_Store
+*.code-workspace
+*.log
