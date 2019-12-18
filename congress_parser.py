@@ -5,7 +5,7 @@ import re
 import psycopg2
 from contextlib import contextmanager
 import logging
-from logging import basicConfig, exception, WARNING
+from logging import basicConfig, exception, ERROR
 
 
 class ProquestParser():
@@ -103,7 +103,7 @@ def main():
     cred = pathlib.Path('login.bin').read_text().split('|')
     root_path = os.path.dirname(__file__)
     congress_path = os.path.join(root_path, 'data', 'congress')
-    basicConfig(filename='cp.log', filemode='w', format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=WARNING)
+    basicConfig(filename='cp.log', filemode='w', format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=ERROR)
 
     date, url = None, None
 

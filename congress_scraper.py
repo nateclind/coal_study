@@ -10,7 +10,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.ui import Select
 from contextlib import contextmanager
 import logging
-from logging import basicConfig, exception, WARNING
+from logging import basicConfig, exception, ERROR
 
 
 class ProquestScraper():
@@ -210,7 +210,7 @@ def main():
     driver = webdriver.Chrome()
     ps = ProquestScraper()
     cred = pathlib.Path('login.bin').read_text().split('|')
-    basicConfig(filename='cs.log', filemode='w', format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=WARNING)
+    basicConfig(filename='cs.log', filemode='w', format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=ERROR)
 
     login = False
 
@@ -228,7 +228,8 @@ def main():
             soup = ps.get_soup(driver)
             
             try:
-                outfile_cursor.execute('INSERT INTO congress_tbl (title, committee, meta, full_text, permalink) VALUES (%s, %s, %s, %s, %s);', (ps.get_title(driver, soup), ps.get_committee(driver, soup), ps.get_meta(driver, soup), ps.get_text(driver, soup), record[0]))
+                outfile_cursor.execute('INSERT INTO congress_tbl (title, committee, meta, full_text, permalink) VALUES (%s, %s, %s, %s, %s);',
+                (ps.get_title(driver, soup), ps.get_committee(driver, soup), ps.get_meta(driver, soup), ps.get_text(driver, soup), record[0]))
             except TypeError as insert_error:
                 exception(insert_error)
             except Exception as insert_e:
