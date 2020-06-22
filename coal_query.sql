@@ -31,31 +31,31 @@ create table news_meta_tbl (
 );
 
 copy news_meta_tbl
-from 'C:\Users\Nathan\Google Drive\Projects\coal_study\meta\new_york_times_meta_1_of_4.txt'
+from '...\meta\new_york_times_meta_1_of_4.txt'
 with (format csv, header);
 
 copy news_meta_tbl
-from 'C:\Users\Nathan\Google Drive\Projects\coal_study\meta\new_york_times_meta_2_of_4.txt'
+from '...\meta\new_york_times_meta_2_of_4.txt'
 with (format csv, header);
 
 copy news_meta_tbl
-from 'C:\Users\Nathan\Google Drive\Projects\coal_study\meta\new_york_times_meta_3_of_4.txt'
+from '...\meta\new_york_times_meta_3_of_4.txt'
 with (format csv, header);
 
 copy news_meta_tbl
-from 'C:\Users\Nathan\Google Drive\Projects\coal_study\meta\new_york_times_meta_4_of_4.txt'
+from '...\meta\new_york_times_meta_4_of_4.txt'
 with (format csv, header);
 
 copy news_meta_tbl
-from 'C:\Users\Nathan\Google Drive\Projects\coal_study\meta\usa_today_meta_1_of_1.txt'
+from '...\meta\usa_today_meta_1_of_1.txt'
 with (format csv, header);
 
 copy news_meta_tbl
-from 'C:\Users\Nathan\Google Drive\Projects\coal_study\meta\wall_street_journal_meta_1_of_2.txt'
+from '...\meta\wall_street_journal_meta_1_of_2.txt'
 with (format csv, header);
 
 copy news_meta_tbl
-from 'C:\Users\Nathan\Google Drive\Projects\coal_study\meta\wall_street_journal_meta_2_of_2.txt'
+from '...\meta\wall_street_journal_meta_2_of_2.txt'
 with (format csv, header);
 
 create view news_vw as (
