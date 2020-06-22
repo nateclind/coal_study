@@ -139,7 +139,7 @@ def main():
                     pass
 
                 if None not in (pq_id, text):
-                    outfile_curs.execute('INSERT INTO news_tbl (doc_id , doc_text) VALUES (%s, %s);', (pq_id, text))
+                    outfile_curs.execute('INSERT INTO news_tbl (storeid , full_text) VALUES (%s, %s);', (pq_id, text))
                     outfile.commit()
                     pq_id, text = None, None
 

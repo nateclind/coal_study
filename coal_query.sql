@@ -31,31 +31,31 @@ create table news_meta_tbl (
 );
 
 copy news_meta_tbl
-from '...\coal_study\meta\new_york_times_meta_1_of_4.txt'
+from 'C:\Users\Nathan\Google Drive\Projects\coal_study\meta\new_york_times_meta_1_of_4.txt'
 with (format csv, header);
 
 copy news_meta_tbl
-from '...\coal_study\meta\new_york_times_meta_2_of_4.txt'
+from 'C:\Users\Nathan\Google Drive\Projects\coal_study\meta\new_york_times_meta_2_of_4.txt'
 with (format csv, header);
 
 copy news_meta_tbl
-from '...\coal_study\meta\new_york_times_meta_3_of_4.txt'
+from 'C:\Users\Nathan\Google Drive\Projects\coal_study\meta\new_york_times_meta_3_of_4.txt'
 with (format csv, header);
 
 copy news_meta_tbl
-from '...\coal_study\meta\new_york_times_meta_4_of_4.txt'
+from 'C:\Users\Nathan\Google Drive\Projects\coal_study\meta\new_york_times_meta_4_of_4.txt'
 with (format csv, header);
 
 copy news_meta_tbl
-from '...\coal_study\meta\usa_today_meta_1_of_1.txt'
+from 'C:\Users\Nathan\Google Drive\Projects\coal_study\meta\usa_today_meta_1_of_1.txt'
 with (format csv, header);
 
 copy news_meta_tbl
-from '...\coal_study\meta\wall_street_journal_meta_1_of_2.txt'
+from 'C:\Users\Nathan\Google Drive\Projects\coal_study\meta\wall_street_journal_meta_1_of_2.txt'
 with (format csv, header);
 
 copy news_meta_tbl
-from '...\coal_study\meta\wall_street_journal_meta_2_of_2.txt'
+from 'C:\Users\Nathan\Google Drive\Projects\coal_study\meta\wall_street_journal_meta_2_of_2.txt'
 with (format csv, header);
 
 create view news_vw as (
@@ -80,12 +80,11 @@ create view news_vw as (
         mt.year,
         mt.permalink,
         mt.startpage,
-        mt.subjectterms,
-        mt.subjects,
+        coalesce(mt.subjectterms, mt.subjects) as subjects,
         mt.findacopy,
         mt.database
     from news_tbl as ns
-    left join news_meta_tbl as mt
+    inner join news_meta_tbl as mt
         on ns.storeid = mt.storeid
 );
 
@@ -113,7 +112,7 @@ create view congress_vw as (
         cg.permalink,
         extract(year from mt.pubdate) as year
     from congress_tbl as cg
-    left join congress_meta_tbl as mt
+    inner join congress_meta_tbl as mt
         on cg.id = mt.id
-    where cg.full_text is not null
+            and cg.full_text is not null
 );
